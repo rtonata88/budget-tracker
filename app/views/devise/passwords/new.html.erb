@@ -1,16 +1,26 @@
-<h2>Forgot your password?</h2>
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white px-5 py-5 rounded max-w-md w-full space-y-8 text-center">
+    <div>
+      <h1 class="strong text-indigo-600 text-3xl"><strong>Budgeta</strong></h1>
+      <h2 class="mt-6 text-center font-extrabold text-gray-900">Forgot password?</h2>
+      <p class="text-green-700"><%= notice %></p>
+      <p class="text-sm alert text-red-700"><%= alert %></p>
+    </div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="rounded-md shadow-sm -space-y-px">
+      <div>
+        <label for="email" class="sr-only">Email </label>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded mb-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Email" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="actions text-center">
+      <%= f.submit "Send me reset password instructions", class: "cursor-pointer font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
