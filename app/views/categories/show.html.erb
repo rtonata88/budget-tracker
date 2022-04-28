@@ -1,10 +1,76 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @category %>
-
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
-
-  <%= button_to "Destroy this category", @category, method: :delete %>
+<div class="py-5">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="lg:text-center">
+      <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase"><%= @category.name %> Expenses</h2>
+    </div>
+    <% if notice%>
+     <div id="alert-1" class="flex p-4 mb-4 bg-green-200 rounded-lg dark:bg-blue-200" role="alert">
+      <svg class="flex-shrink-0 w-5 h-5 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+      <div class="ml-3 text-sm font-medium text-blue-700 dark:text-blue-800">
+        <p class="notice"><%= notice %></p>
+      </div>
+    </div>
+    <% end %>
+    <% if alert%>
+     <div id="alert-1" class="flex p-4 mb-4 bg-blue-100 rounded-lg dark:bg-blue-200" role="alert">
+      <svg class="flex-shrink-0 w-5 h-5 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+      <div class="ml-3 text-sm font-medium text-blue-700 dark:text-blue-800">
+        <p class="notice"><%= alert %></p>
+      </div>
+    </div>
+    <% end %>
+        <dl class="space-y-10 md:space-y-0 md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+         <div class="bg-white px-5 py-5 rounded relative">
+            <dt>
+                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-white text-white">
+                    <!-- Heroicon name: outline/globe-alt -->
+                    <%if @category.icon %>
+                    <%= image_tag @category.icon %>
+                    <% end %>
+                </div>
+                <p class="ml-16 text-lg leading-6 font-medium text-gray-900"><%= link_to @category.name, @category %></p>
+              </dt>
+              <dd class="mt-2 ml-16 text-base text-gray-500">
+                  <% if @category.expenses.sum('amount') > 0 %>
+                  $<%= @category.expenses.sum('amount') %>
+                  <% else %>
+                  $0.00
+                  <% end %>
+              </dd>
+          </div>
+        </dl>
+        <dl class="space-y-10 md:space-y-0 md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="px-2 py-2 sm:px-6">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="mt-10 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">Transaction</th>
+          <th scope="col" class="px-6 py-3">Amount (N$)</th>
+          <th scope="col" class="px-6 py-3">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+              <% if @category.expenses.count > 0 %>
+                <% @category.expenses.each do | expense | %>
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td scope="col" class="px-6 py-3"><%= expense.name %></td>
+                    <td scope="col" class="px-6 py-3"><%= expense.amount %></td>
+                    <td scope="col" class="px-6 py-3"><%= expense.created_at %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <td colspan="3" scope="col" class="px-6 py-3"> There are no transactions recorded for this category. </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <%= link_to "Add new expense", new_category_expense_path(@category), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium text-white bg-blue-600 hover:bg-blue-700 md:py-4 sm:py-4 md:text-lg md:px-10 sm:px-10 uppercase" %>
+  </div>
 </div>

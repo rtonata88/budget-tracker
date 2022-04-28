@@ -1,17 +1,47 @@
-<%= form_with(model: expense) do |form| %>
-  <% if expense.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
-
-      <ul>
-        <% expense.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.submit %>
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white px-5 py-5 rounded max-w-md w-full space-y-8 text-center">
+  <% if category.errors.any? %>
+  <div id="alert-1" class="flex p-4 mb-4 bg-red-500 rounded-lg dark:bg-blue-200" role="alert">
+      <svg class="flex-shrink-0 w-5 h-5 text-white dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+      <div class="ml-3 text-sm font-medium text-white dark:text-blue-800">
+        <p class="notice"><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</p>
+         <ul>
+            <% category.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+      </div>
+      <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex h-8 w-8 dark:bg-blue-200 dark:text-blue-600 dark:hover:bg-blue-300" data-dismiss-target="#alert-1" aria-label="Close">
+        <span class="sr-only">Close</span>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </button>
   </div>
-<% end %>
+  <% end %>
+    <div>
+      <h2 class="mt-6 text-center font-extrabold text-gray-900">Create new <%= @category.name %> expense</h2>
+      <p class="text-green-700"><%= notice %></p>
+      <p class="text-sm alert text-red-700"><%= alert %></p>
+    </div>
+    <%= form_with url: category_expenses_url do |form| %>
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="name" class="text-left">Name </label>
+          <%= form.text_field :name, class: "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded mb-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Expense name" %>
+          </div>
+        </div>
+      
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="amount">Amount($) </label>
+          <%= form.number_field :amount, class: "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded mb-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "0.00" %>
+        </div>
+      </div>
+        <div class="action">
+          <%= form.submit "Save", class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10" %>
+            <%= link_to "Cancel", "/categories/#{@category.id}", class: "px-5 py-5" %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,11 @@ class ExpensesController < ApplicationController
 
   # GET /expenses/new
   def new
+    @category = Category.find(params[:category_id])
     @expense = Expense.new
+    respond_to do |format|
+      format.html { render :new, locals: { expense: @expense} }
+    end
   end
 
   # GET /expenses/1/edit
@@ -21,11 +25,15 @@ class ExpensesController < ApplicationController
 
   # POST /expenses or /expenses.json
   def create
-    @expense = Expense.new(expense_params)
+    #@expense = Expense.new(name: params[:name], amount: params[:amount])
+    
+    @category = Category.find(params[:category_id])
+
+    @category.expenses.create({name: params[:name], amount: params[:amount], user: current_user})
 
     respond_to do |format|
-      if @expense.save
-        format.html { redirect_to expense_url(@expense), notice: "Expense was successfully created." }
+      if @category.save
+        format.html { redirect_to category_url(@category), notice: "Expense was successfully created." }
         format.json { render :show, status: :created, location: @expense }
       else
         format.html { render :new, status: :unprocessable_entity }
