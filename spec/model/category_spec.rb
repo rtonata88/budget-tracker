@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Category, :type => :model do
     before :each do
         @user = User.new(name: 'Richard', email: 'rtonata@gmail.com', password: '123456')
-        @category = Category.new(name: 'Category', icon: 'https://thumbs.dreamstime.com/z/groceries-paper-bag-vector-illustration-97077851.jpg', user: @user)
+        @category = Category.new(name: 'Groceries', icon: 'https://thumbs.dreamstime.com/z/groceries-paper-bag-vector-illustration-97077851.jpg', user: @user)
     end
 
   it 'name should be valid ' do
