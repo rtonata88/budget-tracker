@@ -45,6 +45,14 @@ Note: In case this doesn't work, try `rails db:drop` and do the steps all over a
 - Twitter: [@rtonata](https://twitter.com/rtonata)
 - LinkedIn: [Richard Chambula](https://www.linkedin.com/in/richard-chambula-49198425/)
 
+## License and Attributions
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/)
+
+## Acknowledgements
+
+Original design idea by [Gregoire Vella on Behance.](https://www.behance.net/gregoirevella)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
