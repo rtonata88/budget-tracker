@@ -11,6 +11,8 @@ gem 'pg', '~> 1.1'
 
 gem 'devise'
 
+gem 'rspec-rails'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
