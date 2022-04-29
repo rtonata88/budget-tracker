@@ -39,6 +39,7 @@ Note: In case this doesn't work, try `rails db:drop` and do the steps all over a
 
 ### Demo
 [Video Demo](https://www.loom.com/share/8c12fa3bafc34cc28052cafccaa495a3)
+[Link Demo](https://rtonata-budgeta.herokuapp.com/)
 
 ## Authors
 
