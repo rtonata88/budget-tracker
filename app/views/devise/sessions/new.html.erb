@@ -1,0 +1,34 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white px-5 py-5 rounded-xl max-w-md w-full space-y-8 text-center">
+    <div>
+      <h1 class="strong text-blue-600 text-3xl"><strong>Budgeta</strong></h1>
+      <h2 class="mt-6 text-center font-extrabold text-gray-900">Log in your account</h2>
+      <p class="text-sm alert text-red-700"><%= alert %></p>
+    </div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="name" class="sr-only">Email </label>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Email address" %>
+        </div>
+        <div>
+        <label for="password" class="sr-only">Password</label>
+          <%= f.password_field :password, autocomplete: "current-password", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Password" %>
+        </div>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+  <div class="flex items-center justify-between m-5">
+    <div class="flex items-center">
+      <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
+      <%= f.label :remember_me, class: "ml-2 block text-sm text-gray-900" %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in", class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

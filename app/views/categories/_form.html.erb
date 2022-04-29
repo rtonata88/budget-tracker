@@ -1,0 +1,43 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white px-5 py-5 rounded max-w-md w-full space-y-8 text-center">
+    <div>
+    <% if category.errors.any? %>
+    <div id="alert-1" class="flex p-4 mb-4 bg-red-500 rounded-lg dark:bg-blue-200" role="alert">
+      <svg class="flex-shrink-0 w-5 h-5 text-white dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+      <div class="ml-3 text-sm font-medium text-white dark:text-blue-800">
+        <p class="notice"><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</p>
+         <ul>
+            <% category.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+      </div>
+  </div>
+  <% end %>
+      <h2 class="mt-6 text-center font-extrabold text-gray-900">Create new category</h2>
+      <p class="text-green-700"><%= notice %></p>
+      <p class="text-sm alert text-red-700"><%= alert %></p>
+    </div>
+    <%= form_with(model: category) do |form| %>
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="name" class="sr-only">Name </label>
+          <%= form.text_field :name, class: "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded mb-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "What would you like to call this category" %>
+          </div>
+        </div>
+      
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="name" class="sr-only">Icon </label>
+          <%= form.text_field :icon, class: "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded mb-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Please paste a link to the image" %>
+        </div>
+      </div>
+        <div class="action">
+          <%= form.submit "Save", class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10" %>
+            <%= link_to "Cancel", categories_path, class: "px-5 py-5" %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
